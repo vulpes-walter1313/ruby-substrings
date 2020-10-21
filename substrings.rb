@@ -13,23 +13,22 @@ def substrings(str, dictionary_arr)
         end
         filtered_words.push(filtered.join.downcase)
     end
-    p filtered_words # works perfectly
-    filtered_words.each do |word|
+    # filtered_words now is an array of lowercase words without non-alphabet characters
+    dictionary_arr.each do |dict_word|
         # create regex from each word and find matches in the word_arr
-        word_regex = Regexp.new(word)
-        dictionary_arr.each do |dict_word|
-            if word_regex.match(dict_word)
-                if subs_hash.include?(word)
-                    subs_hash[word] += 1
+        word_regex = Regexp.new(dict_word)
+        # iterate over provided string words
+        filtered_words.each do |word|
+            if word_regex.match(word)
+                # add matches of dictionary words to sabs_hash
+                if subs_hash.include?(dict_word)
+                    subs_hash[dict_word] += 1
                 else
-                    subs_hash[word] = 1
+                    subs_hash[dict_word] = 1
                 end
             end
         end
     end
-
-    # add matches to sabs_hash
-
     # return subs_hash
     subs_hash
 end
